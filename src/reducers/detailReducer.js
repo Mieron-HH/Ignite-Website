@@ -1,6 +1,6 @@
 const initState = {
-	game: {},
-	screen: {},
+	game: { platforms: [] },
+	screen: { results: [] },
 };
 
 const detailReducer = (state = initState, action) => {
