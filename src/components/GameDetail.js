@@ -14,7 +14,12 @@ import {
 	faSteam,
 	faApple,
 } from "@fortawesome/free-brands-svg-icons";
-import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+import {
+	faGamepad,
+	faStar as faStarFull,
+	faStarHalf,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 
 const GameDetail = ({ pathId }) => {
 	const history = useHistory();
@@ -48,6 +53,44 @@ const GameDetail = ({ pathId }) => {
 		}
 	};
 
+	// Get Stars
+	const getStars = () => {
+		const stars = [];
+		const rating = game.rating;
+		let idCounter = 0;
+		console.log(rating);
+		for (let i = 0; i < 5; i++) {
+			if (i < Math.floor(rating)) {
+				stars.push(
+					<FontAwesomeIcon
+						style={{ color: "orange" }}
+						key={idCounter}
+						icon={faStarFull}
+					/>
+				);
+			} else if (i >= Math.floor(rating) && rating % i < rating) {
+				stars.push(
+					<FontAwesomeIcon
+						style={{ color: "orange" }}
+						key={idCounter}
+						icon={faStarHalf}
+					/>
+				);
+			} else {
+				stars.push(
+					<FontAwesomeIcon
+						style={{ color: "orange" }}
+						key={idCounter}
+						icon={faStarEmpty}
+					/>
+				);
+			}
+			idCounter++;
+		}
+
+		return stars;
+	};
+
 	//Data
 	const { game, screen, isLoading } = useSelector((state) => state.detail);
 
@@ -59,7 +102,8 @@ const GameDetail = ({ pathId }) => {
 						<Stats>
 							<div className="rating">
 								<motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
-								<p>Rating: {game.rating}</p>
+								<p>Rating:</p>
+								{getStars()}
 							</div>
 
 							<Info>
