@@ -6,6 +6,15 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { smallImage } from "../util";
+//Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faPlaystation,
+	faXbox,
+	faSteam,
+	faApple,
+} from "@fortawesome/free-brands-svg-icons";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
 
 const GameDetail = ({ pathId }) => {
 	const history = useHistory();
@@ -17,6 +26,28 @@ const GameDetail = ({ pathId }) => {
 			history.push("/");
 		}
 	};
+
+	const getPlatform = (platform, id, name) => {
+		switch (platform) {
+			case "PlayStation 4":
+				return faPlaystation;
+			case "PlayStation 5":
+				return faPlaystation;
+			case "Xbox One":
+				return faXbox;
+			case "Xbox Series S/X":
+				return faXbox;
+			case "PC":
+				return faSteam;
+			case "Nintendo Switch":
+				return faGamepad;
+			case "iOS":
+				return faApple;
+			default:
+				return faGamepad;
+		}
+	};
+
 	//Data
 	const { game, screen, isLoading } = useSelector((state) => state.detail);
 
@@ -35,7 +66,15 @@ const GameDetail = ({ pathId }) => {
 								<h3>Platforms</h3>
 								<Platforms>
 									{game.platforms.map((data) => (
-										<h3 key={data.platform.id}>{data.platform.name}</h3>
+										<FontAwesomeIcon
+											icon={getPlatform(data.platform.name)}
+											key={data.platform.id}
+											data-bs-toggle="tooltip"
+											data-bs-placement="bottom"
+											title={data.platform.name}
+											size="2x"
+											style={{ marginRight: "1rem", color: "rgba(0,0,0,0.6" }}
+										/>
 									))}
 								</Platforms>
 							</Info>
@@ -77,7 +116,7 @@ const CardShadow = styled(motion.div)`
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 5;
 
 	&::-webkit-scrollbar {
 		width: 0.5rem;
@@ -100,6 +139,7 @@ const Detail = styled(motion.div)`
 	position: absolute;
 	left: 10%;
 	color: black;
+	z-index: 10;
 
 	img {
 		width: 100%;
