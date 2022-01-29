@@ -39,9 +39,12 @@ export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
 export const newGamesURL = () => `${base_url}${new_games}`;
 
-//GAME DETAILS
+//Game Details
 export const gameDetailsURL = (game_id) =>
 	`${base_url}/games/${game_id}?${key}`;
 //Game Screenshots
 export const gameScreenShotURL = (game_id) =>
 	`${base_url}/games/${game_id}/screenshots?${key}`;
+//Searched Game
+export const serachGameURL = (game_name) =>
+	`${base_url}/games?${key}&search=${game_name}&page_size=9`;

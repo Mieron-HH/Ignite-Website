@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 //Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 //FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDragon } from "@fortawesome/free-solid-svg-icons";
+//Redux and Route
+import { fetchSearch } from "../actions/gamesAction";
+import { useDispatch } from "react-redux";
 
 const Nav = () => {
+	const dispatch = useDispatch();
+	const [textInput, setTextInput] = useState("");
+
+	const inputHandler = (e) => {
+		setTextInput(e.target.value);
+	};
+
+	const submitSearch = (e) => {
+		e.preventDefault();
+		dispatch(fetchSearch(textInput));
+		setTextInput("");
+	};
+
+	const clearSearched = () => {
+		dispatch({ type: "CLEAR_SEARCHED" });
+	};
+
 	return (
 		<StyledNav>
-			<Logo>
+			<Logo onClick={clearSearched}>
 				<FontAwesomeIcon className="logo-icon" icon={faDragon} size="2x" />
 				<h1>Ignite</h1>
 			</Logo>
-			<div className="search">
-				<input type="text" />
-				<button>Search</button>
-			</div>
+			<form className="search" onSubmit={submitSearch}>
+				<input type="text" value={textInput} onChange={inputHandler} />
+				<button type="submit">Search</button>
+			</form>
 		</StyledNav>
 	);
 };
