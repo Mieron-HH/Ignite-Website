@@ -116,8 +116,7 @@ const GameDetail = ({ pathId }) => {
 											data-bs-toggle="tooltip"
 											data-bs-placement="bottom"
 											title={data.platform.name}
-											size="2x"
-											style={{ marginRight: "1rem", color: "rgba(0,0,0,0.6" }}
+											id="platform-icons"
 										/>
 									))}
 								</Platforms>
@@ -184,9 +183,18 @@ const Detail = styled(motion.div)`
 	left: 10%;
 	color: black;
 	z-index: 10;
+	margin-bottom: 1rem !important;
 
 	img {
 		width: 100%;
+	}
+
+	@media screen and (max-width: 700px) {
+		width: 90%;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		left: 5%;
+		margin-top: 1rem;
 	}
 `;
 
@@ -194,18 +202,45 @@ const Stats = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media screen and (max-width: 700px) {
+		.rating {
+			font-size: 0.8rem;
+
+			p {
+				font-size: 0.8rem;
+			}
+
+			h3 {
+				font-size: 0.8rem;
+			}
+		}
+	}
 `;
 
 const Info = styled(motion.div)`
 	text-align: center;
+
+	@media screen and (max-width: 700px) {
+		font-size: 0.8rem;
+	}
 `;
 
 const Platforms = styled(motion.div)`
 	display: flex;
 	justify-content: space-evenly;
 
-	img {
-		margin-left: 3rem;
+	#platform-icons {
+		color: rgba(0, 0, 0, 0.6);
+		font-size: 2rem;
+		margin-right: 1rem;
+	}
+
+	@media screen and (max-width: 700px) {
+		#platform-icons {
+			font-size: 1rem;
+			margin-right: 0.5rem;
+		}
 	}
 `;
 
@@ -219,6 +254,14 @@ const Media = styled(motion.div)`
 
 const Description = styled(motion.div)`
 	margin: 5rem;
+
+	@media screen and (max-width: 700px) {
+		margin: 1rem;
+
+		p {
+			font-size: 1rem;
+		}
+	}
 `;
 
 export default GameDetail;

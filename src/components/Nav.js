@@ -2,6 +2,7 @@ import React, { useState } from "react";
 //Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { fadeIn } from "../animations";
 //FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDragon } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +29,7 @@ const Nav = () => {
 	};
 
 	return (
-		<StyledNav>
+		<StyledNav variants={fadeIn} initial="hidden" animate="show">
 			<Logo onClick={clearSearched}>
 				<FontAwesomeIcon className="logo-icon" icon={faDragon} size="2x" />
 				<h1>Ignite</h1>
@@ -61,6 +62,20 @@ const StyledNav = styled(motion.div)`
 		cursor: pointer;
 		background: #ff7676;
 		color: white;
+	}
+
+	@media screen and (max-width: 850px) {
+		padding: 2rem;
+
+		input {
+			width: 70%;
+			font-size: 1.45rem;
+			padding: 0.5rem;
+		}
+
+		button {
+			padding: 0.5rem 0.8rem;
+		}
 	}
 `;
 

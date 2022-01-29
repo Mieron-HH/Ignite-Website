@@ -9,6 +9,8 @@ import Game from "../components/Game";
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { useLocation } from "react-router-dom";
+//Animations
+import { fadeIn } from "../animations";
 
 const Home = () => {
 	//Get The Current Location
@@ -25,7 +27,7 @@ const Home = () => {
 	);
 
 	return (
-		<GameList>
+		<GameList variants={fadeIn} initial="hidden" animate="show">
 			<AnimateSharedLayout type="crossfade">
 				<AnimatePresence>
 					{pathId && <GameDetail pathId={pathId} />}
@@ -96,6 +98,11 @@ const GameList = styled(motion.div)`
 	h2 {
 		padding: 5rem 0rem;
 	}
+
+	@media screen and (max-width: 700px) {
+		padding: 0rem 1rem;
+		overflow-x: hidden;
+	}
 `;
 
 const Games = styled(motion.div)`
@@ -104,6 +111,10 @@ const Games = styled(motion.div)`
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 	grid-column-gap: 3rem;
 	grid-row-gap: 5rem;
+
+	@media screen and (max-width: 700px) {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
 `;
 
 export default Home;
