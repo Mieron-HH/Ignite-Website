@@ -16,8 +16,9 @@ const Home = () => {
 	//Get The Current Location
 	const location = useLocation();
 	const pathId = location.pathname.split("/")[2];
-	//Fetch Games
 	const dispatch = useDispatch();
+
+	//Fetch Games
 	useEffect(() => {
 		dispatch(loadGames());
 	}, [dispatch]);
@@ -51,6 +52,7 @@ const Home = () => {
 				) : (
 					""
 				)}
+
 				<h2>Upcoming Games</h2>
 				<Games>
 					{upcoming.map((game) => (
